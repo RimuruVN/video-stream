@@ -53,7 +53,7 @@ async def _human_time_duration(seconds):
 async def start_(client: Client, message: Message):
     await message.reply_text(
         f"""✨ **Welcome {message.from_user.mention()} !**\n
-💭 [{BOT_NAME}](https://t.me/{BOT_USERNAME}) **Allows you to play music and video on groups through the new Telegram's video chats!**
+💭 [{BOT_NAME}](https://t.me/{BOT_USERNAME}) **Cho phép bạn phát nhạc và video trên các nhóm thông qua các cuộc trò chuyện video của Telegram mới!**
 
 💡 **Tìm hiểu tất cả các lệnh của Bot và cách chúng hoạt động bằng cách nhấp vào nút» 📚 Commands**
 
