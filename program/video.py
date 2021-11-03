@@ -309,26 +309,26 @@ async def vstream(c: Client, m: Message):
         return
     if not a.can_manage_voice_chats:
         await m.reply_text(
-            "missing required permission:" + "\n\n» ❌ __Manage voice chat__"
+            "Thiếu quyền cần thiết:" + "\n\n» ❌ __Manage voice chat__"
         )
         return
     if not a.can_delete_messages:
         await m.reply_text(
-            "missing required permission:" + "\n\n» ❌ __Delete messages__"
+            "Thiếu quyền cần thiết:" + "\n\n» ❌ __Delete messages__"
         )
         return
     if not a.can_invite_users:
-        await m.reply_text("missing required permission:" + "\n\n» ❌ __Add users__")
+        await m.reply_text("Thiếu quyền cần thiết:" + "\n\n» ❌ __Add users__")
         return
     if not a.can_restrict_members:
-        await m.reply_text("missing required permission:" + "\n\n» ❌ __Ban users__")
+        await m.reply_text("Thiếu quyền cần thiết:" + "\n\n» ❌ __Ban users__")
         return
     try:
         ubot = await user.get_me()
         b = await c.get_chat_member(chat_id, ubot.id)
         if b.status == "kicked":
             await m.reply_text(
-                f"@{ASSISTANT_NAME} **is banned in group** {m.chat.title}\n\n» **unban the userbot first if you want to use this bot.**"
+                f"@{ASSISTANT_NAME} **bị cấm trong nhóm** {m.chat.title}\n\n» **Bỏ cấm userbot trước nếu bạn muốn sử dụng bot này.**"
             )
             return
     except UserNotParticipant:
@@ -336,7 +336,7 @@ async def vstream(c: Client, m: Message):
             try:
                 await user.join_chat(m.chat.username)
             except Exception as e:
-                await m.reply_text(f"❌ **userbot failed to join**\n\n**reason**:{e}")
+                await m.reply_text(f"❌ **Trợ lý không tham gia được**\n\n**Lý do**:{e}")
                 return
         else:
             try:
@@ -347,16 +347,16 @@ async def vstream(c: Client, m: Message):
                 pass
             except Exception as e:
                 return await m.reply_text(
-                    f"❌ **userbot failed to join**\n\n**reason**:{e}"
+                    f"❌ **Trợ lý không tham gia được**\n\n**Lý do**:{e}"
                 )
 
     if len(m.command) < 2:
-        await m.reply("» give me a live-link/m3u8 url/youtube link to stream.")
+        await m.reply("» Cho tôi một liên kết trực tiếp / m3u8 url / liên kết youtube để phát trực tiếp.")
     else:
         if len(m.command) == 2:
             link = m.text.split(None, 1)[1]
             Q = 720
-            loser = await m.reply("🔄 **processing stream...**")
+            loser = await m.reply("🔄 **Luồng xử lý...**")
         elif len(m.command) == 3:
             op = m.text.split(None, 1)[1]
             link = op.split(None, 1)[0]
@@ -366,7 +366,7 @@ async def vstream(c: Client, m: Message):
             else:
                 Q = 720
                 await m.reply(
-                    "» __only 720, 480, 360 allowed__ \n💡 **now streaming video in 720p**"
+                    "» __Chỉ cho phép 720, 480, 360__ \n💡 **Hiện đang phát trực tuyến video trong 720p**"
                 )
             loser = await m.reply("🔄 **processing stream...**")
         else:
@@ -389,7 +389,7 @@ async def vstream(c: Client, m: Message):
                 requester = f"[{m.from_user.first_name}](tg://user?id={m.from_user.id})"
                 await m.reply_photo(
                     photo=f"{IMG_1}",
-                    caption=f"💡 **Track added to the queue**\n\n💭 **Chat:** `{chat_id}`\n🎧 **Request by:** {requester}\n🔢 **At position »** `{pos}`",
+                    caption=f"💡 **Bản nhạc đã được thêm vào hàng đợi**\n\n💭 **Chat:** `{chat_id}`\n🎧 **@owohub:** {requester}\n🔢 **Vị trí »** `{pos}`",
                     reply_markup=keyboard,
                 )
             else:
@@ -416,7 +416,7 @@ async def vstream(c: Client, m: Message):
                     )
                     await m.reply_photo(
                         photo=f"{IMG_2}",
-                        caption=f"💡 **[Live stream video]({link}) started.**\n\n💭 **Chat:** `{chat_id}`\n💡 **Status:** `Playing`\n🎧 **Request by:** {requester}",
+                        caption=f"💡 **[Video phát trực tiếp]({link}) bắt đầu.**\n\n💭 **Chat:** `{chat_id}`\n💡 **Trạng thái:** `Đang trực tiếp`\n🎧 **@owohub:** {requester}",
                         reply_markup=keyboard,
                     )
                 except Exception as ep:
